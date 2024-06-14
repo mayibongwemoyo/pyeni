@@ -1,0 +1,198 @@
+WARNING!!! mmoyo: You must SSH using username and password to schedule CRON jobs.
+
+[mmoyo@scp-3-scripting(phenm1) ~]$ lt all
+-bash: lt: command not found
+[mmoyo@scp-3-scripting(phenm1) ~]$ amos 0452ML
+EMGUI_CREDENTIALS: info ( /usr/local/bin/ssucredentials.sh ): The SLS certificate is
+ already present and is valid for next 24 hours
+
+                        __  __  ____   _____
+                  /\   |  \/  |/ __ \ / ____|
+                 /  \  | \  / | |  | | (___
+                / /\ \ | |\/| | |  | |\___ \
+               / ____ \| |  | | |__| |____) |
+              /_/    \_\_|  |_|\____/|_____/
+              OSS Framework for MoShell-23.0b
+  Copyright (c) Ericsson AB 2001-2023 - All Rights Reserved
+
+
+WARNING: Free disk space reached limit on AMOS logs folder: used=74%, disk_limit_war
+n=70%, disk_limit_high=85%
+Please cleanup disk space by contacting system administrators to reschedule cleanup
+and archiving jobs.
+
+WARNING: the AMOS version currently running is more than 70 weeks old.
+It is recommended to always use the latest released moshell version.
+To obtain the latest released version contact your local Ericsson support.
+
+$amosrb_pid = 27150
+
+Checking ip contact...OK
+
+HELP MENU            : h
+BASIC MO COMMANDS    : m
+OTHER MO COMMANDS    : n
+OTHER COMMANDS       : o
+PM COMMANDS          : p
+QUIT                 : q
+
+0452ML> lt all
+
+240613-10:55:46+0200 10.100.185.157 23.0b  stopfile=/tmp/27091
+Looking up temporary_amos account... OK.
+Trying temporary_amos_mmoyo_311's password from amos lookupAccount ... OK
+
+$ssh_pid = 27323
+
+Connected to 10.100.185.157 (SubNetwork=RNC_RBS,SubNetwork=PHRNC01,SubNetwork=PH_BB,
+MeContext=0452ML,ManagedElement=0452ML)
+
+Checking MOM version...MSRBS_NODE_MODEL_22.Q4_584.28076.108_8081
+Parsing MOM (cached): /ericsson/log/amos/moshell_logfiles/mmoyo/logs_moshell/tempfil
+es/20240613-105540_26951/MSRBS_NODE_MODEL_22.Q4_584.28076.108_8081.xml.cache.gz ....
+....................................................................................
+....................................................................................
+..............Done.
+Using paramfile /opt/ericsson/amos/moshell/commonjars/pm/PARAM_MSRBS_22.Q4.txt
+Parsing file /opt/ericsson/amos/moshell/commonjars/pm/PARAM_MSRBS_22.Q4.txt ........
+......................................................................Done.
+Using imomdfile /opt/ericsson/amos/moshell/commonjars/pm/IMOMD_MSRBS_22.Q4.txt
+Using imomfile /opt/ericsson/amos/moshell/commonjars/pm/IMOM_MSRBS_22.Q4.txt
+Connected to 10.100.185.157 (SubNetwork=RNC_RBS,SubNetwork=PHRNC01,SubNetwork=PH_BB,
+MeContext=0452ML,ManagedElement=0452ML)
+
+Total: 6 CPRI links (6 OK, 0 OKW, 0 NOK, 0 NT)
+.
++--------+                      +------------+
+|        | A        O25      D1 | RRU_900-S1 |
+|        |----------1/1---------| RRU2212B8* |
+|        |         OK-74m       |   BXP_4    |
+|        |                      +------------+
+|        |                             |A  |B
+|        |                   SE=S4* AG=900_S1
+|        |
+|        |                      +------------+
+|        | B        O25      D1 | RRU_900-S2 |
+|        |----------2/2---------| RRU2212B8* |
+|        |         OK-74m       |   BXP_5    |
+|        |                      +------------+
+|        |                             |A  |B
+|        |                   SE=S5* AG=900_S2
+|        |
+|        |                      +------------+
+|        | C        O25      D1 | RRU_900-S3 |
+|        |----------3/3---------| RRU2212B8* |
+|        |         OK-74m       |   BXP_2    |
+|        |                      +------------+
+|        |                             |A  |B
+|        |                   SE=S6* AG=900_S3
+|        |
+|        |                     +-----------------------+
+| UL_BB  | D       O101     D1 |   RRU_1800_2600-S1    |
+| BB6631 |---------4/4---------| RRU446644B144B344B7C* |
+| 000100 |        OK-69m       |         BXP_6         |
+|        |                     +-----------------------+
+|        |                               |A  |B  |C  |D
+|        |                       SE=S1* AG=1800_2600_S1
+|        |                      FDD=0452MLA FDD=0452MLG
+|        |    NB=1/0452MUA/0452MUA NB=1/0452MUD/0452MUD
+|        |
+|        |                     +-----------------------+
+|        | E       O101     D1 |   RRU_1800_2600-S2    |
+|        |---------5/5---------| RRU446644B144B344B7C* |
+|        |        OK-69m       |         BXP_3         |
+|        |                     +-----------------------+
+|        |                               |A  |B  |C  |D
+|        |                       SE=S2* AG=1800_2600_S2
+|        |                      FDD=0452MLB FDD=0452MLH
+|        |    NB=1/0452MUB/0452MUB NB=1/0452MUE/0452MUE
+|        |
+|        |                     +-----------------------+
+|        | F       O101     D1 |   RRU_1800_2600-S3    |
+|        |---------6/6---------| RRU446644B144B344B7C* |
+|        |        OK-69m       |         BXP_7         |
+|        |                     +-----------------------+
+|        |                               |A  |B  |C  |D
+|        |                       SE=S3* AG=1800_2600_S3
+|        |                      FDD=0452MLC FDD=0452MLI
++--------+    NB=1/0452MUC/0452MUC NB=1/0452MUF/0452MUF
+
+=====================================================================================================================================
+Last MO: 19217. Loaded 19217 MOs. Total: 19218 MOs.
+
+0452ML> alt
+
+240613-10:58:41+0200 10.100.185.157 23.0b MSRBS_NODE_MODEL_22.Q4_584.28076.108_8081
+stopfile=/tmp/27091
+
+$ssh_pid = 29372
+
+Connected to 10.100.185.157 (SubNetwork=RNC_RBS,SubNetwork=PHRNC01,SubNetwork=PH_BB,
+MeContext=0452ML,ManagedElement=0452ML)
+
+Collecting Alarms...
+...........................
+====================================================================================
+================================
+Date & Time (UTC)   S Specific Problem                    MO (Cause/AdditionalInfo)
+====================================================================================
+================================
+2024-05-21 07:30:55 M License Key Not Available           Lm=1,FeatureState=CXC40122
+79 (License key for Progressive Barring For Special Access Classes (CXC4012279) requ
+ired for the configured functioning of the Managed Element is not available in curre
+ntly installed key file.)
+2024-05-23 08:40:03 m External Link Failure               ENodeBFunction=1 (X2 link
+problem to one or several neighbouring eNodeBs. AI: PLMN ID-eNB ID 1 : 6484-3492,PLM
+N ID-eNB ID 2 : 6484-3204,PLMN ID-eNB ID 3 : 6484-2946,PLMN ID-eNB ID 4 : 6484-2698,
+PLMN ID-eNB ID 5 : 6484-2691,PLMN ID-eNB ID 6 : 6484-2686,PLMN ID-eNB ID 7 : 6484-26
+84,PLMN ID-eNB ID 8 : 6484-2683,PLMN ID-eNB ID 9 : 6484-2678,PLMN ID-eNB ID : list t
+runcated)
+2024-05-30 14:30:49 m EC Bus Unreliable Link              EcBus=1 (Possible reasons:
+ two nodes configured as primary, HW unit misconfiguration or EC Bus contact error.)
+>>> Total: 3 Alarms (0 Critical, 1 Major)
+=====================================================================================================================================
+ID ;T ;RiL ;BPBP ;BOARD1                ;LNH1 ;PORT ;R ;LINK ;RATE  ; BER ;BOARD2                ;LNH2 ;PORT ;R ;LINK ;RATE  ; BER ;LENGTH ;MO1 - MO2
+=====================================================================================================================================
+ 1 ;O ;  1 ;1111 ;BB6631                ;000100 ; 1 ;M ;Up   ;2.5G  ;   0 ;RRU2212B8*            ;BXP_4  ; 0 ;S ;Up   ;2.5G  ;   0 ;   74m ;Fru=UL_BB(A) Fru=RRU_900-S1(D1)
+ 2 ;O ;  2 ;1111 ;BB6631                ;000100 ; 2 ;M ;Up   ;2.5G  ;   0 ;RRU2212B8*            ;BXP_5  ; 0 ;S ;Up   ;2.5G  ;   0 ;   74m ;Fru=UL_BB(B) Fru=RRU_900-S2(D1)
+ 3 ;O ;  3 ;1111 ;BB6631                ;000100 ; 3 ;M ;Up   ;2.5G  ;   0 ;RRU2212B8*            ;BXP_2  ; 0 ;S ;Up   ;2.5G  ;   0 ;   74m ;Fru=UL_BB(C) Fru=RRU_900-S3(D1)
+ 4 ;O ;  4 ;1111 ;BB6631                ;000100 ; 4 ;M ;Up   ;10.1G ;   0 ;RRU446644B144B344B7C* ;BXP_6  ; 0 ;S ;Up   ;10.1G ;   0 ;   69m ;Fru=UL_BB(D) Fru=RRU_1800_2600-S1(D1)
+ 5 ;O ;  5 ;1111 ;BB6631                ;000100 ; 5 ;M ;Up   ;10.1G ;   0 ;RRU446644B144B344B7C* ;BXP_3  ; 0 ;S ;Up   ;10.1G ;   0 ;   69m ;Fru=UL_BB(E) Fru=RRU_1800_2600-S2(D1)
+ 6 ;O ;  6 ;1111 ;BB6631                ;000100 ; 6 ;M ;Up   ;10.1G ;   0 ;RRU446644B144B344B7C* ;BXP_7  ; 0 ;S ;Up   ;10.1G ;   0 ;   69m ;Fru=UL_BB(F) Fru=RRU_1800_2600-S3(D1)
+-------------------------------------------------------------------------------------------------------------------------------------
+=====================================================================================================================================
+FRU              ;LNH    ;BOARD                 ;RF  ;BP  ;TX (W/dBm)  ;VSWR (RL)   ;RX (dBm) ;UEs/RLs  ;Sector/AntennaGroup/Cells (State:CellIds:PCIs)
+=====================================================================================================================================
+RRU_1800_2600-S1 ;BXP_6  ;RRU446644B144B344B7C* ; A  ;11  ;-           ;1.20 (20.8) ;         ;116/30   ;SE=S1* AG=1800_2600_S1 FDD=0452MLA FDD=0452MLG NB=1/0452MUA/0452MUA NB=1/0452MU
+D/0452MUD (1:1:81, 1:11:81, 1:14071, 1:14074)
+RRU_1800_2600-S1 ;BXP_6  ;RRU446644B144B344B7C* ; B  ;11  ;-           ;1.19 (21.3) ;         ;116/30   ;SE=S1* AG=1800_2600_S1 FDD=0452MLA FDD=0452MLG NB=1/0452MUA/0452MUA NB=1/0452MU
+D/0452MUD (1:1:81, 1:11:81, 1:14071, 1:14074)
+RRU_1800_2600-S1 ;BXP_6  ;RRU446644B144B344B7C* ; C  ;11  ;-           ;1.30 (17.8) ;         ;116/30   ;SE=S1* AG=1800_2600_S1 FDD=0452MLA FDD=0452MLG NB=1/0452MUA/0452MUA NB=1/0452MU
+D/0452MUD (1:1:81, 1:11:81, 1:14071, 1:14074)
+RRU_1800_2600-S1 ;BXP_6  ;RRU446644B144B344B7C* ; D  ;11  ;-           ;1.15 (23.3) ;         ;116/30   ;SE=S1* AG=1800_2600_S1 FDD=0452MLA FDD=0452MLG NB=1/0452MUA/0452MUA NB=1/0452MU
+D/0452MUD (1:1:81, 1:11:81, 1:14071, 1:14074)
+RRU_1800_2600-S2 ;BXP_3  ;RRU446644B144B344B7C* ; A  ;11  ;-           ;1.21 (20.4) ;         ;141/28   ;SE=S2* AG=1800_2600_S2 FDD=0452MLB FDD=0452MLH NB=1/0452MUB/0452MUB NB=1/0452MU
+E/0452MUE (1:2:82, 1:12:82, 1:14072, 1:14075)
+RRU_1800_2600-S2 ;BXP_3  ;RRU446644B144B344B7C* ; B  ;11  ;-           ;1.16 (22.4) ;         ;141/28   ;SE=S2* AG=1800_2600_S2 FDD=0452MLB FDD=0452MLH NB=1/0452MUB/0452MUB NB=1/0452MU
+E/0452MUE (1:2:82, 1:12:82, 1:14072, 1:14075)
+RRU_1800_2600-S2 ;BXP_3  ;RRU446644B144B344B7C* ; C  ;11  ;-           ;1.17 (21.9) ;         ;141/28   ;SE=S2* AG=1800_2600_S2 FDD=0452MLB FDD=0452MLH NB=1/0452MUB/0452MUB NB=1/0452MU
+E/0452MUE (1:2:82, 1:12:82, 1:14072, 1:14075)
+RRU_1800_2600-S2 ;BXP_3  ;RRU446644B144B344B7C* ; D  ;11  ;-           ;1.17 (22.0) ;         ;141/28   ;SE=S2* AG=1800_2600_S2 FDD=0452MLB FDD=0452MLH NB=1/0452MUB/0452MUB NB=1/0452MU
+E/0452MUE (1:2:82, 1:12:82, 1:14072, 1:14075)
+RRU_1800_2600-S3 ;BXP_7  ;RRU446644B144B344B7C* ; A  ;11  ;-           ;1.21 (20.6) ;         ;125/19   ;SE=S3* AG=1800_2600_S3 FDD=0452MLC FDD=0452MLI NB=1/0452MUC/0452MUC NB=1/0452MU
+F/0452MUF (1:3:83, 1:13:83, 1:14073, 1:14076)
+RRU_1800_2600-S3 ;BXP_7  ;RRU446644B144B344B7C* ; B  ;11  ;-           ;1.23 (19.9) ;         ;125/19   ;SE=S3* AG=1800_2600_S3 FDD=0452MLC FDD=0452MLI NB=1/0452MUC/0452MUC NB=1/0452MU
+F/0452MUF (1:3:83, 1:13:83, 1:14073, 1:14076)
+RRU_1800_2600-S3 ;BXP_7  ;RRU446644B144B344B7C* ; C  ;11  ;-           ;1.18 (21.5) ;         ;125/19   ;SE=S3* AG=1800_2600_S3 FDD=0452MLC FDD=0452MLI NB=1/0452MUC/0452MUC NB=1/0452MU
+F/0452MUF (1:3:83, 1:13:83, 1:14073, 1:14076)
+RRU_1800_2600-S3 ;BXP_7  ;RRU446644B144B344B7C* ; D  ;11  ;-           ;1.18 (21.8) ;         ;125/19   ;SE=S3* AG=1800_2600_S3 FDD=0452MLC FDD=0452MLI NB=1/0452MUC/0452MUC NB=1/0452MU
+F/0452MUF (1:3:83, 1:13:83, 1:14073, 1:14076)
+RRU_900-S1       ;BXP_4  ;RRU2212B8*            ; A  ;11  ;-           ;1.13 (24.5) ;         ;         ;SE=S4* AG=900_S1
+RRU_900-S1       ;BXP_4  ;RRU2212B8*            ; B  ;11  ;-           ;1.05 (32.3) ;         ;         ;SE=S4* AG=900_S1
+RRU_900-S2       ;BXP_5  ;RRU2212B8*            ; A  ;11  ;-           ;1.14 (23.9) ;         ;         ;SE=S5* AG=900_S2
+RRU_900-S2       ;BXP_5  ;RRU2212B8*            ; B  ;11  ;-           ;1.06 (30.4) ;         ;         ;SE=S5* AG=900_S2
+RRU_900-S3       ;BXP_2  ;RRU2212B8*            ; A  ;11  ;-           ;1.10 (26.4) ;         ;         ;SE=S6* AG=900_S3
+RRU_900-S3       ;BXP_2  ;RRU2212B8*            ; B  ;11  ;-           ;1.05 (33.1) ;         ;         ;SE=S6* AG=900_S3
+-------------------------------------------------------------------------------------------------------------------------------------
+
+0452ML>

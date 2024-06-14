@@ -1,139 +1,110 @@
+import re
 import matplotlib.pyplot as plt
 import networkx as nx
-import re
+import numpy as np
 
+def extract_network_data(input_text):
+    """Extracts network data from the provided input text.
 
-class NetworkVisualizer:
-    """A class for parsing network output and visualizing the topology."""
+    Args:
+        input_text (str): The input text containing the network diagram.
 
-    def __init__(self):
-        pass
-    def parse_output(text):
-        """Parses the provided text output and returns a structured dictionary.
+    Returns:
+        dict: A dictionary containing the extracted network data.
+    """
 
-        Args:
-            text: The text output to parse.
+    # Find the starting and ending points of the diagram
+    start_index = input_text.find("+--------+")
+    end_index = input_text.find(
+        "=====================================================================================================================================")
 
-        Returns:
-            A dictionary containing the parsed information.
-        """
+    # Extract the relevant text
+    diagram_text = input_text[start_index:end_index]
 
-        # Extract the total CPRI links information
-        total_links_match = re.search(r"Total: (\d+) CPRI links \((\d+) OK, (\d+) OKW, (\d+) NOK, (\d+) NT\)", text)
-        if total_links_match:
-            total_links = {
-                "Total": int(total_links_match.group(1)),
-                "OK": int(total_links_match.group(2)),
-                "OKW": int(total_links_match.group(3)),
-                "NOK": int(total_links_match.group(4)),
-                "NT": int(total_links_match.group(5))
-            }
+    # Extract the BBU information
+    bbu_match = re.search(r"BB(\d+)\s+", diagram_text)
+    bbu = bbu_match.group(0) if bbu_match else None
+
+    # Extract the RRU information
+    rrus = []
+    for line in diagram_text.splitlines():
+        match = re.search(r"RRU_([A-Za-z0-9_ -]+)", line)
+        if match:
+            rrus.append(match.group(0))
+
+    # Extract the BXP information
+    bxp_info = []
+    for line in diagram_text.splitlines():
+        match = re.search(r"BXP_(\w+)", line)
+        if match:
+            bxp_info.append(match.group(0))
+
+    # Construct the data dictionary
+    data = {
+        "BBU": bbu,
+        "RRUs": [],
+    }
+
+    # Add RRU information based on the available data
+    links = ["A", "B", "C", "D", "E", "F"]
+    for i in range(len(rrus)):
+        if i < len(rrus):
+            data["RRUs"].append({"name": rrus[i], "BXP": bxp_info[i], "link": links[i]})
+
+    return data
+
+def draw_network_diagram(data):
+    """Draws a network diagram based on the provided data, grouping RRUs by sector.
+
+    Args:
+        data (dict): A dictionary containing the network data.
+    """
+
+    # Create a graph
+    G = nx.Graph()
+
+    # Add BBU node
+    G.add_node(data["BBU"])
+
+    # Add RRU nodes and edges, grouping by sector
+    for rru in data["RRUs"]:
+        G.add_node(rru["name"])
+        G.add_edge(data["BBU"], rru["name"], label=rru["link"])
+
+    # Set node labels
+    node_labels = {node: node for node in G.nodes}
+
+    # Set edge labels
+    edge_labels = {(u, v): G[u][v]["label"] for u, v in G.edges}
+
+    # Define positions for nodes, grouping by sector
+    pos = {}
+    sector_angles = {
+        "S1": 0,
+        "S2": 120,
+        "S3": 240,
+    }
+    sector_radius = 0.8  # Adjust for sector spacing
+    item_spacing = 8  # Degrees between items in a sector
+    for i, node in enumerate(G.nodes):
+        if node == data["BBU"]:
+            pos[node] = (0, 0)  # Center the BBU
         else:
-            total_links = {}
+            sector = node.split("-")[-1].strip()
+            angle = sector_angles[sector]
+            angle += i * item_spacing  # Adjust angle for spacing within sector
+            x = sector_radius * np.cos(np.deg2rad(angle))
+            y = sector_radius * np.sin(np.deg2rad(angle))
+            pos[node] = (x, y)
 
-        # Extract the RRU information
-        rrus = []
-        for match in re.findall(
-                r"^\|\s*(\w+)\s*\|\s*(\w+)\s*(\w+)\s*(\w+)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*$",
-                text, re.MULTILINE):
-            rrus.append({
-                "ID": match[0],
-                "Band": match[1],
-                "O": match[2],
-                "D": match[3],
-                "RRU_Type": match[4],
-                "RRU_Model": match[5],
-                "BXP": match[6],
-                "SE": match[7],
-                "AG": match[8],
-                "FDD": match[9],
-                "NB": match[10],
-                "Status": match[11],
-                "Status_Value": match[12],
-            })
+    # Draw the graph
+    nx.draw(G, pos, with_labels=True, labels=node_labels, font_size=10)
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=8)
 
-        # Extract BBU information
-        bbu_match = re.search(
-            r"\|\s*(UL_BB\s+\w+)\s+\|\s*(BB\d+)\s+\|\s*(\d+)\s*\|", text)
-        if bbu_match:
-            bbu_id = bbu_match.group(1)
-            bbu_name = bbu_match.group(2)
-        else:
-            bbu_id = None
-            bbu_name = None
+    plt.show()
 
-        # Return the parsed information
-        return {
-            "Total_Links": total_links,
-            "RRUs": rrus,
-            "BBU_ID": bbu_id,
-            "BBU_Name": bbu_name
-        }
-
-
-    def create_network_graph(parsed_data):
-        """Creates a network graph from the parsed data.
-
-        Args:
-            parsed_data: The dictionary containing the parsed information.
-
-        Returns:
-            A NetworkX graph object representing the network topology.
-        """
-
-        # Extract the BBU and RRU information from the parsed data
-        bbu_id = parsed_data["BBU_ID"]
-        bbu_name = parsed_data["BBU_Name"]
-
-        rrus = [{"name": rru["RRU_Type"], "BXP": rru["BXP"], "link": rru["ID"]} for rru in parsed_data["RRUs"]]
-
-        # Create a graph
-        G = nx.Graph()
-
-        # Ensure bbu_id is not None before adding it
-        if bbu_id is None:
-            raise ValueError("BBU ID could not be found in the parsed data.")
-
-        # Add BBU node
-        G.add_node(bbu_id, label=bbu_name)
-
-        # Add RRU nodes and edges
-        for rru in rrus:
-            G.add_node(rru["name"])
-            G.add_edge(bbu_id, rru["name"], label=rru["link"])
-
-        # Set node labels
-        node_labels = {node: node for node in G.nodes}
-
-        # Set edge labels
-        edge_labels = {(u, v): G[u][v]["label"] for u, v in G.edges}
-
-        return G, node_labels, edge_labels
-
-
-    def draw_graph(G, node_labels, edge_labels):
-        """Draws the network graph.
-
-        Args:
-            G: The NetworkX graph object.
-            node_labels: The dictionary of node labels.
-            edge_labels: The dictionary of edge labels.
-        """
-        # Set up the plot
-        plt.figure(figsize=(12, 8))
-
-        # Define the layout for the graph
-        pos = nx.spring_layout(G)
-
-        # Draw the nodes with labels
-        nx.draw_networkx_nodes(G, pos, node_size=3000, node_color='skyblue', edgecolors='black')
-        nx.draw_networkx_labels(G, pos, labels=node_labels, font_size=10, font_color='black')
-
-        # Draw the edges with labels
-        nx.draw_networkx_edges(G, pos, width=2, edge_color='black')
-        nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_color='red')
-
-        # Display the plot
-        plt.title("Network Topology")
-        plt.axis('off')
-        plt.show()
+# Example usage:
+with open("output.txt", "r") as file:
+    input_text = file.read()
+network_data = extract_network_data(input_text)
+draw_network_diagram(network_data)

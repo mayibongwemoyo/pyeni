@@ -1,6 +1,7 @@
 from datetime import datetime
 from netmiko import ConnectHandler
 from flask import Flask, request
+import os
 
 app = Flask(__name__)
 
@@ -14,11 +15,11 @@ def server_side_execution(site_code):
     st_ru = "st ru"
 
     net_connect = ConnectHandler(
-        device_type="linux",
-        ip="172.22.234.23",
-        port=22,
-        username="mmoyo",
-        password="#Berry360",
+        device_type=os.getenv("DEVICE_TYPE"),
+        ip=os.getenv("IP_ADDRESS"),
+        port=int(os.getenv("PORT")),  # Convert port to integer
+        username=os.getenv("USERNAME"),
+        password=os.getenv("PASSWORD"),
         # global_delay_factor = 4,
     )
 
